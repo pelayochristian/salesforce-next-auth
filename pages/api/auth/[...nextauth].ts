@@ -17,6 +17,7 @@ export const authOptions: NextAuthOptions = {
             authorization: { params: { scope: 'openid api refresh_token' } },
             userinfo: {
                 async request({ provider, tokens, client }) {
+                    console.log('tokens: ', tokens)
                     //@ts-ignored
                     return await client.userinfo(tokens, {
                         //@ts-ignored
@@ -25,7 +26,6 @@ export const authOptions: NextAuthOptions = {
                 },
             },
             profile(profile) {
-                console.log('Profile: ', profile)
                 return { id: profile.email, ...profile };
             }
         }),
