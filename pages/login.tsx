@@ -6,7 +6,7 @@ const Login: NextPage = () => {
     if (sessionData) {
         return (
             <div>
-                <p>Welcome to Salesforce NextAuth</p>
+                <p>Logged in as {sessionData?.user?.name}</p>
                 <button onClick={() => signOut()}>Logout</button>
             </div>
         );
