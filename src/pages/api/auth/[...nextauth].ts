@@ -10,6 +10,7 @@ export const authOptions: NextAuthOptions = {
     },
     providers: [
         SalesforceProvider({
+            name: 'Salesforce (Production)',
             clientId: env.SALESFORCE_CLIENT_ID,
             clientSecret: env.SALESFORCE_CLIENT_SECRET,
             idToken: true,
@@ -28,8 +29,10 @@ export const authOptions: NextAuthOptions = {
             profile(profile) {
                 return { id: profile.email, ...profile };
             }
-        }),
-    ]
+        })
+    ], pages: {
+        signIn: "/signin",
+    },
 }
 
 export default NextAuth(authOptions);
