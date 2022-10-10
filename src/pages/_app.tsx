@@ -1,15 +1,18 @@
-import '../src/styles/globals.css';
+import '../common/styles/globals.css';
 import type { AppType } from 'next/app';
-import { SessionProvider } from 'next-auth/react';
 import type { Session } from 'next-auth';
+import { SessionProvider } from 'next-auth/react';
+import { Flowbite } from 'flowbite-react';
 
 const MyApp: AppType<{ session: Session | null }> = ({
     Component,
     pageProps: { session, ...pageProps },
 }) => {
     return (
-        <SessionProvider session={session}>
-            <Component {...pageProps} />
+        <SessionProvider>
+            <Flowbite>
+                <Component {...pageProps} />
+            </Flowbite>
         </SessionProvider>
     );
 };

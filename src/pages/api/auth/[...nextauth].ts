@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import SalesforceProvider from 'next-auth/providers/salesforce'
-import { env } from "../../../src/env/server.mjs";
+import { env } from "../../../env/server.mjs";
 
 export const authOptions: NextAuthOptions = {
     callbacks: {
