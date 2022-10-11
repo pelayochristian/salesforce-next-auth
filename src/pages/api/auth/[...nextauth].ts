@@ -1,12 +1,114 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import SalesforceProvider from 'next-auth/providers/salesforce'
 import { env } from "../../../env/server.mjs";
+import axios from 'axios'
+import qs from 'qs'
+
+/**
+ * Method to check the token expire date by calling the 
+ * Salesforce End point fot Token Introspection.
+ * @param token 
+ */
+const tokenIntrospection = async (tokenObject: any) => {
+    try {
+        var data = qs.stringify({
+            'token': tokenObject.accessToken,
+            'token_type_hint': 'access_token',
+            'client_id': env.SALESFORCE_CLIENT_ID,
+            'client_secret': env.SALESFORCE_CLIENT_SECRET
+        });
+
+        const tokenResponse = await axios({
+            method: 'post',
+            url: 'https://login.salesforce.com/services/oauth2/introspect',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Accept': 'application/json'
+            },
+            data: data
+        });
+
+        return await tokenResponse.data;
+    } catch (error) {
+        return {
+            error: "TokenIntrospectionError",
+        }
+    }
+}
+
+/**
+ * Consume token object and returns a new updated `accessToken`.
+ * @param tokenObject 
+ */
+const refreshAccessToken = async (tokenObject: any) => {
+    try {
+        var data = qs.stringify({
+            'grant_type': 'refresh_token',
+            'client_id': env.SALESFORCE_CLIENT_ID,
+            'client_secret': env.SALESFORCE_CLIENT_SECRET,
+            'refresh_token': tokenObject.refreshToken
+        });
+
+        const tokenResponse = await axios({
+            method: 'post',
+            url: 'https://login.salesforce.com/services/oauth2/token',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            data: data
+        });
+
+        const { access_token, refresh_token } = await tokenResponse.data;
+
+        // Get expire date from token introspection end point.
+        tokenObject.accessToken = access_token;
+        const { exp } = await tokenIntrospection(tokenObject);
+
+        return {
+            accessToken: access_token,
+            refreshToken: refresh_token ?? tokenObject.refreshToken,
+            accessTokenExpires: exp
+        };
+    } catch (error) {
+        return {
+            error: "RefreshAccessTokenError",
+        }
+    }
+}
 
 export const authOptions: NextAuthOptions = {
     callbacks: {
-        session({ session }) {
-            return session;
+        async session({ session, token }) {
+            //@ts-ignored
+            session.accessToken = token.accessToken;
+            //@ts-ignored
+            session.refreshToken = token.refreshToken;
+            return Promise.resolve(session);
         },
+        async jwt({ token, account }) {
+            // Initial sign in
+            if (account) {
+                // Set access and refresh token
+                token.accessToken = account.access_token;
+                token.refreshToken = account.refresh_token;
+
+                // Get the Expire Date
+                const { exp } = await tokenIntrospection(token);
+                token.accessTokenExpires = exp;
+
+                console.log('Use New Token...');
+                return Promise.resolve(token);
+            }
+
+            // @ts-ignored
+            if (token.accessTokenExpires < Date.now()) {
+                console.log('Use Previous Token...');
+                return Promise.resolve(token);
+            }
+
+            console.log('Use Refresh Token...');
+            return Promise.resolve(await refreshAccessToken(token));
+        }
     },
     providers: [
         SalesforceProvider({
@@ -18,7 +120,6 @@ export const authOptions: NextAuthOptions = {
             authorization: { params: { scope: 'openid api refresh_token' } },
             userinfo: {
                 async request({ provider, tokens, client }) {
-                    console.log('tokens: ', tokens)
                     //@ts-ignored
                     return await client.userinfo(tokens, {
                         //@ts-ignored
