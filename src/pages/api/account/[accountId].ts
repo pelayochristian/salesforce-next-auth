@@ -8,10 +8,10 @@ export default async function handler(
 ) {
     const conn = await getSFDCConnection(req, res, authOptions);
     const { accountId } = req.query;
-    if (!conn) {
-        res.status(410).json({ message: 'Unauthorized' });
-        return;
-    }
+    // if (!conn) {
+    //     res.status(410).json({ message: 'Unauthorized' });
+    //     return;
+    // }
     return new Promise(resolve => {
         //@ts-ignored
         conn.sobject("Account").retrieve(accountId, function (err, account) {

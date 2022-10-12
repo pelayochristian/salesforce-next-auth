@@ -6,17 +6,13 @@ import jsforce from "jsforce"
 export const getSFDCConnection = async (req: NextApiRequest, res: NextApiResponse, authOptions: any) => {
     try {
         const session = await unstable_getServerSession(req, res, authOptions);
-        if (session) {
-            return await new jsforce.Connection({
-                // @ts-ignored
-                instanceUrl: session.instanceUrl,
-                // @ts-ignored
-                accessToken: session.accessToken,
-            });
-        } else {
-            // Not Signed in
-            res.status(401)
-        }
+        if (!session) res.status(401).json({ message: 'Unauthorized!' })
+        return await new jsforce.Connection({
+            // @ts-ignored
+            instanceUrl: session.instanceUrl,
+            // @ts-ignored
+            accessToken: session.accessToken,
+        });
     } catch (error) {
         return { error: 'SFDCConnectionError' }
     }

@@ -14,7 +14,19 @@ const AccountSelector = ({ setAccountDetails, setLoading }: any) => {
      * Retrieve all account available.
      */
     useEffect(() => {
-        axios
+        // axios
+        //     .get('/api/account')
+        //     .then((response) => {
+        //         setAccounts(response.data);
+        //     })
+        //     .catch((err) => {
+        //         console.error('Client-GetAccountsError: ', err.message);
+        //     });
+        getAccounts();
+    }, []);
+
+    const getAccounts = async () => {
+        await axios
             .get('/api/account')
             .then((response) => {
                 setAccounts(response.data);
@@ -22,7 +34,7 @@ const AccountSelector = ({ setAccountDetails, setLoading }: any) => {
             .catch((err) => {
                 console.error('Client-GetAccountsError: ', err.message);
             });
-    }, []);
+    };
 
     /**
      * Handle the click event of the Account name then retrieve account
