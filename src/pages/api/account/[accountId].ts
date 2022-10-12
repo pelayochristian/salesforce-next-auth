@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { authOptions } from "../auth/[...nextauth]";
 import { getSFDCConnection } from "../util/session";
 
 export default async function handler(

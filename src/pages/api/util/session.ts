@@ -1,6 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-
-import { unstable_getServerSession } from "next-auth/next"
 import jsforce from "jsforce"
 import { getSession } from 'next-auth/react'
 

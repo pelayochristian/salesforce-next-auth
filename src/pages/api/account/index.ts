@@ -1,5 +1,4 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
-import { authOptions } from '../auth/[...nextauth]';
 import { getSFDCConnection } from '../util/session';
 
 export default async function handler(
@@ -9,7 +8,7 @@ export default async function handler(
 
     const conn = await getSFDCConnection(req, res);
     if (!conn) return;
-    
+
     //@ts-ignored
     var records: Array = [];
     return new Promise(resolve => {
