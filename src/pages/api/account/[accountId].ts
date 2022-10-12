@@ -6,12 +6,10 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const conn = await getSFDCConnection(req, res, authOptions);
+    const conn = await getSFDCConnection(req, res);
+    if (!conn) return;
+
     const { accountId } = req.query;
-    // if (!conn) {
-    //     res.status(410).json({ message: 'Unauthorized' });
-    //     return;
-    // }
     return new Promise(resolve => {
         //@ts-ignored
         conn.sobject("Account").retrieve(accountId, function (err, account) {
