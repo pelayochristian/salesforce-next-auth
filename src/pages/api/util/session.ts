@@ -6,7 +6,11 @@ export const getSFDCConnection = async (req: NextApiRequest, res: NextApiRespons
     try {
         const session = await getSession({ req })
         console.log('session', session)
-        if (!session) res.status(401).json({ message: 'Unauthorized!' }); return;
+        if (!session) {
+            res.status(401).json({ message: 'Unauthorized!' });
+            return;
+        };
+
         return await new jsforce.Connection({
             // @ts-ignored
             instanceUrl: session.instanceUrl,
