@@ -14,14 +14,6 @@ const AccountSelector = ({ setAccountDetails, setLoading }: any) => {
      * Retrieve all account available.
      */
     useEffect(() => {
-        // axios
-        //     .get('/api/account')
-        //     .then((response) => {
-        //         setAccounts(response.data);
-        //     })
-        //     .catch((err) => {
-        //         console.error('Client-GetAccountsError: ', err.message);
-        //     });
         getAccounts();
     }, []);
 
@@ -52,7 +44,7 @@ const AccountSelector = ({ setAccountDetails, setLoading }: any) => {
     };
 
     return (
-        <div className="py-2 overflow-y-auto max-h-96 max-w-md bg-white roußnded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
+        <div className="rounded-md py-2 overflow-y-auto max-h-96 max-w-md bg-white roußnded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
             <ul>
                 {accounts ? (
                     accounts.map((item: AccountProps, index) => {

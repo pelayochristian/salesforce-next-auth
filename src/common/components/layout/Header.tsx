@@ -6,22 +6,19 @@ import {
     Navbar,
 } from 'flowbite-react';
 import { signIn, signOut, useSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
 import React from 'react';
 
 const Header = () => {
+    const router = useRouter();
     const { data: sessionData, status } = useSession();
 
     return (
         <nav className="bg-white px-2 sm:px-4 py-5 dark:bg-gray-800 fixed w-full z-20 top-0 left-0 border-b border-gray-200 dark:border-gray-600">
             <Navbar fluid={true} rounded={true}>
                 <div className="container flex flex-wrap justify-between items-center mx-auto">
-                    <Navbar.Brand href="https://flowbite.com/">
-                        {/* <img
-                            src="https://flowbite.com/docs/images/logo.svg"
-                            className="mr-3 h-6 sm:h-9"
-                            alt="Flowbite Logo"
-                        /> */}
-                        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
+                    <Navbar.Brand href="/">
+                        <span className="self-center whitespace-nowrap text-xl font-semibold text-blue-600">
                             Salesforce NextAuth Demo
                         </span>
                     </Navbar.Brand>
@@ -30,14 +27,23 @@ const Header = () => {
                         <DarkThemeToggle />
                         {status === 'authenticated' ? (
                             <Dropdown
-                                arrowIcon={false}
+                                arrowIcon={true}
                                 inline={true}
                                 label={
-                                    <Avatar
-                                        alt="User settings"
-                                        img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                                        rounded={true}
-                                    />
+                                    <div className="flex py-2">
+                                        <svg
+                                            className="w-6 h-6"
+                                            fill="none"
+                                            stroke="currentColor"
+                                            viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path
+                                                stroke-linecap="round"
+                                                stroke-linejoin="round"
+                                                stroke-width="2"
+                                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                        </svg>
+                                    </div>
                                 }>
                                 <Dropdown.Header>
                                     <span className="block text-sm">
@@ -47,7 +53,14 @@ const Header = () => {
                                         {sessionData?.user?.email}
                                     </span>
                                 </Dropdown.Header>
-                                <Dropdown.Item>Github</Dropdown.Item>
+                                <Dropdown.Item
+                                    onClick={() =>
+                                        router.push(
+                                            'https://github.com/pelayochristian/salesforce-next-auth'
+                                        )
+                                    }>
+                                    Github
+                                </Dropdown.Item>
                                 <Dropdown.Item>Hasnode</Dropdown.Item>
                                 <Dropdown.Divider />
                                 <Dropdown.Item onClick={() => signOut()}>
