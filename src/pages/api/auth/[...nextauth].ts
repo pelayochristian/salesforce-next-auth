@@ -20,7 +20,7 @@ const tokenIntrospection = async (tokenObject: any) => {
 
         const tokenResponse = await axios({
             method: 'post',
-            url: 'https://login.salesforce.com/services/oauth2/introspect',
+            url: `${env.SALESFORCE_URL_LOGIN}/services/oauth2/introspect`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded',
                 'Accept': 'application/json'
@@ -51,7 +51,7 @@ const refreshAccessToken = async (tokenObject: any) => {
 
         const tokenResponse = await axios({
             method: 'post',
-            url: 'https://login.salesforce.com/services/oauth2/token',
+            url: `${env.SALESFORCE_URL_LOGIN}/services/oauth2/token`,
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded'
             },
@@ -120,7 +120,7 @@ export const authOptions: NextAuthOptions = {
             clientId: env.SALESFORCE_CLIENT_ID,
             clientSecret: env.SALESFORCE_CLIENT_SECRET,
             idToken: true,
-            wellKnown: 'https://login.salesforce.com/.well-known/openid-configuration',
+            wellKnown: `${env.SALESFORCE_URL_LOGIN}/.well-known/openid-configuration`,
             authorization: { params: { scope: 'openid api refresh_token' } },
             userinfo: {
                 async request({ provider, tokens, client }) {

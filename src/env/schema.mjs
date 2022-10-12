@@ -17,6 +17,7 @@ export const serverSchema = z.object({
     ),
     SALESFORCE_CLIENT_ID: z.string(),
     SALESFORCE_CLIENT_SECRET: z.string(),
+    SALESFORCE_URL_LOGIN: z.string(),
 });
 
 /**
