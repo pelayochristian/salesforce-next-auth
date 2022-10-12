@@ -1,4 +1,4 @@
-# Salesforce Nextjs Integration using NextAuth
+# Salesforce Authentication in NextJS using NextAuth
 
 First, run the development server:
 
