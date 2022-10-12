@@ -58,7 +58,7 @@ const refreshAccessToken = async (tokenObject: any) => {
             data: data
         });
 
-        const { access_token, refresh_token } = await tokenResponse.data;
+        const { access_token, refresh_token, instance_url } = await tokenResponse.data;
 
         // Get expire date from token introspection end point.
         tokenObject.accessToken = access_token;
@@ -67,7 +67,8 @@ const refreshAccessToken = async (tokenObject: any) => {
         return {
             accessToken: access_token,
             refreshToken: refresh_token ?? tokenObject.refreshToken,
-            accessTokenExpires: exp
+            accessTokenExpires: exp,
+            instanceUrl: instance_url
         };
     } catch (error) {
         return {
@@ -83,6 +84,8 @@ export const authOptions: NextAuthOptions = {
             session.accessToken = token.accessToken;
             //@ts-ignored
             session.refreshToken = token.refreshToken;
+            //@ts-ignored
+            session.instanceUrl = token.instanceUrl;
             return Promise.resolve(session);
         },
         async jwt({ token, account }) {
@@ -91,6 +94,7 @@ export const authOptions: NextAuthOptions = {
                 // Set access and refresh token
                 token.accessToken = account.access_token;
                 token.refreshToken = account.refresh_token;
+                token.instanceUrl = account.instance_url;
 
                 // Get the Expire Date
                 const { exp } = await tokenIntrospection(token);
@@ -101,7 +105,7 @@ export const authOptions: NextAuthOptions = {
             }
 
             // @ts-ignored
-            if (token.accessTokenExpires < Date.now()) {
+            if (Date.now() < (token.accessTokenExpires * 1000)) {
                 console.log('Use Previous Token...');
                 return Promise.resolve(token);
             }

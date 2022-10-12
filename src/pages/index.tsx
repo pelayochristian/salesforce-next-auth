@@ -1,8 +1,7 @@
 import type { NextPage } from 'next';
-import { useSession } from 'next-auth/react';
 import Head from 'next/head';
-import Image from 'next/image';
 import Layout from '../common/components/layout/Layout';
+import AccountSection from '../common/components/layout/AccountSection';
 
 const Home: NextPage = () => {
     return (
@@ -16,7 +15,7 @@ const Home: NextPage = () => {
                 <link rel="icon" href="/favicon.ico" />
             </Head>
             <Layout>
-                <p>test</p>
+                <AccountSection />
             </Layout>
         </>
     );

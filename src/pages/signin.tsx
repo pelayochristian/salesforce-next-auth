@@ -214,7 +214,7 @@ export const getServerSideProps = async (ctx: CtxOrReq | undefined) => {
      */
     if (session) {
         return {
-            redirect: { destination: '/' },
+            redirect: { destination: '/', permanent: false },
         };
     }
 
