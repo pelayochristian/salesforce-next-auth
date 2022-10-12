@@ -7,7 +7,7 @@ interface AccountProps {
     Id: string;
 }
 
-const AccountSelector = ({ setAccountDetails }: any) => {
+const AccountSelector = ({ setAccountDetails, setLoading }: any) => {
     const [accounts, setAccounts] = useState([]);
 
     /**
@@ -30,10 +30,12 @@ const AccountSelector = ({ setAccountDetails }: any) => {
      * @param e
      */
     const getAccountDetails = async (e: React.MouseEvent<HTMLElement>) => {
+        setLoading(true);
         const target = e.target as Element;
         const accountId = target.getAttribute('data-id');
         await axios.get(`/api/account/${accountId}`).then((response) => {
             setAccountDetails(response.data);
+            setLoading(false);
         });
     };
 
@@ -45,7 +47,7 @@ const AccountSelector = ({ setAccountDetails }: any) => {
                         return (
                             <li key={index}>
                                 <button
-                                    className="px-6 text-left w-full py-3 hover:bg-gray-700"
+                                    className="px-6 text-left w-full py-3 dark:hover:bg-gray-700 hover:bg-gray-300"
                                     data-id={item.Id}
                                     onClick={getAccountDetails}>
                                     {item.Name}
