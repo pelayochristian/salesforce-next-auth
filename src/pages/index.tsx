@@ -2,6 +2,8 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../common/components/layout/Layout';
 import AccountSection from '../common/components/AccountSection';
+import { getSession } from 'next-auth/react';
+import { CtxOrReq } from 'next-auth/client/_utils';
 
 const Home: NextPage = () => {
     return (
@@ -19,6 +21,25 @@ const Home: NextPage = () => {
             </Layout>
         </>
     );
+};
+
+export const getServerSideProps = async (ctx: CtxOrReq | undefined) => {
+    const session = await getSession(ctx);
+    /**
+     * If session is available then redirect to main page.
+     */
+    if (!session) {
+        return {
+            redirect: { destination: '/signin', permanent: false },
+        };
+    }
+
+    /**
+     * Return providers and CSRF Token
+     */
+    return {
+        props: { session },
+    };
 };
 
 export default Home;

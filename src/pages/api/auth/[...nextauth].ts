@@ -116,7 +116,7 @@ export const authOptions: NextAuthOptions = {
     },
     providers: [
         SalesforceProvider({
-            name: 'Salesforce (Production)',
+            name: 'Salesforce',
             clientId: env.SALESFORCE_CLIENT_ID,
             clientSecret: env.SALESFORCE_CLIENT_SECRET,
             idToken: true,
