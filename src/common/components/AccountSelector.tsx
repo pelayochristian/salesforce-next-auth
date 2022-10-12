@@ -1,9 +1,5 @@
+import { AccountDetailsProps } from 'account-details';
 import axios from 'axios';
-import {
-    GetServerSideProps,
-    InferGetServerSidePropsType,
-    InferGetStaticPropsType,
-} from 'next';
 import React, { useEffect, useState } from 'react';
 
 interface AccountProps {
@@ -11,18 +7,34 @@ interface AccountProps {
     Id: string;
 }
 
-const AccountSelector = () => {
+const AccountSelector = ({ setAccountDetails }: any) => {
     const [accounts, setAccounts] = useState([]);
 
+    /**
+     * Retrieve all account available.
+     */
     useEffect(() => {
-        axios.get('/api/account').then((response) => {
-            setAccounts(response.data);
-        });
+        axios
+            .get('/api/account')
+            .then((response) => {
+                setAccounts(response.data);
+            })
+            .catch((err) => {
+                console.error('Client-GetAccountsError: ', err.message);
+            });
     }, []);
 
-    const getAccountDetails = (e: React.MouseEvent<HTMLElement>) => {
+    /**
+     * Handle the click event of the Account name then retrieve account
+     * via accoundId API.
+     * @param e
+     */
+    const getAccountDetails = async (e: React.MouseEvent<HTMLElement>) => {
         const target = e.target as Element;
-        console.log(target.getAttribute('data-id'));
+        const accountId = target.getAttribute('data-id');
+        await axios.get(`/api/account/${accountId}`).then((response) => {
+            setAccountDetails(response.data);
+        });
     };
 
     return (

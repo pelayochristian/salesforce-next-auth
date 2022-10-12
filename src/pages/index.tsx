@@ -1,7 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Layout from '../common/components/layout/Layout';
-import AccountSection from '../common/components/layout/AccountSection';
+import AccountSection from '../common/components/AccountSection';
 
 const Home: NextPage = () => {
     return (

@@ -1,78 +1,88 @@
-import { Checkbox, Table } from 'flowbite-react';
+import { Button, Checkbox, Label, Table, TextInput } from 'flowbite-react';
 import React from 'react';
 
-const AccountDataTable = () => {
+const AccountDataTable = ({ accountDetails }: any) => {
     return (
-        <Table hoverable={true}>
-            <Table.Head>
-                <Table.HeadCell className="!p-4">
-                    <Checkbox />
-                </Table.HeadCell>
-                <Table.HeadCell>Product name</Table.HeadCell>
-                <Table.HeadCell>Color</Table.HeadCell>
-                <Table.HeadCell>Category</Table.HeadCell>
-                <Table.HeadCell>Price</Table.HeadCell>
-                <Table.HeadCell>
-                    <span className="sr-only">Edit</span>
-                </Table.HeadCell>
-            </Table.Head>
-            <Table.Body className="divide-y">
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                    <Table.Cell className="!p-4">
-                        <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        Apple MacBook Pro 17{'"'}
-                    </Table.Cell>
-                    <Table.Cell>Sliver</Table.Cell>
-                    <Table.Cell>Laptop</Table.Cell>
-                    <Table.Cell>$2999</Table.Cell>
-                    <Table.Cell>
-                        <a
-                            href="/tables"
-                            className="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                            Edit
-                        </a>
-                    </Table.Cell>
-                </Table.Row>
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                    <Table.Cell className="!p-4">
-                        <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        Microsoft Surface Pro
-                    </Table.Cell>
-                    <Table.Cell>White</Table.Cell>
-                    <Table.Cell>Laptop PC</Table.Cell>
-                    <Table.Cell>$1999</Table.Cell>
-                    <Table.Cell>
-                        <a
-                            href="/tables"
-                            className="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                            Edit
-                        </a>
-                    </Table.Cell>
-                </Table.Row>
-                <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                    <Table.Cell className="!p-4">
-                        <Checkbox />
-                    </Table.Cell>
-                    <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                        Magic Mouse 2
-                    </Table.Cell>
-                    <Table.Cell>Black</Table.Cell>
-                    <Table.Cell>Accessories</Table.Cell>
-                    <Table.Cell>$99</Table.Cell>
-                    <Table.Cell>
-                        <a
-                            href="/tables"
-                            className="font-medium text-blue-600 hover:underline dark:text-blue-500">
-                            Edit
-                        </a>
-                    </Table.Cell>
-                </Table.Row>
-            </Table.Body>
-        </Table>
+        <form className="flex flex-col gap-4">
+            {/* Name */}
+            <div>
+                <div className="mb-2 block">
+                    <Label htmlFor="Name" value="Name" />
+                </div>
+                <TextInput
+                    id="Name"
+                    type="text"
+                    readOnly={true}
+                    value={accountDetails?.Name || ''}
+                />
+            </div>
+            {/* BillingCountry */}
+            <div>
+                <div className="mb-2 block">
+                    <Label htmlFor="BillingCountry" value="BillingCountry" />
+                </div>
+                <TextInput
+                    id="BillingCountry"
+                    type="text"
+                    readOnly={true}
+                    value={accountDetails?.BillingCountry || ''}
+                />
+            </div>
+
+            <div className="grid grid-cols-2 gap-8">
+                {/* Phone */}
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="Phone" value="Phone" />
+                    </div>
+                    <TextInput
+                        id="Phone"
+                        type="text"
+                        readOnly={true}
+                        value={accountDetails?.Phone || ''}
+                    />
+                </div>
+                {/* Fax */}
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="Fax" value="Fax" />
+                    </div>
+                    <TextInput
+                        id="Fax"
+                        type="text"
+                        readOnly={true}
+                        value={accountDetails?.Fax || ''}
+                    />
+                </div>
+                {/* CreatedDate */}
+                <div>
+                    <div className="mb-2 block">
+                        <Label htmlFor="CreatedDate" value="CreatedDate" />
+                    </div>
+                    <TextInput
+                        id="CreatedDate"
+                        type="text"
+                        readOnly={true}
+                        value={accountDetails?.CreatedDate || ''}
+                    />
+                </div>
+                {/* LastModifiedDate */}
+                <div>
+                    <div className="mb-2 block">
+                        <Label
+                            htmlFor="LastModifiedDate"
+                            value="LastModifiedDate"
+                        />
+                    </div>
+                    <TextInput
+                        id="LastModifiedDate"
+                        type="text"
+                        readOnly={true}
+                        value={accountDetails?.LastModifiedDate || ''}
+                    />
+                </div>
+            </div>
+        </form>
     );
 };
 
