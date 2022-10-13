@@ -30,9 +30,10 @@ This project also uses the [jsforce](https://jsforce.github.io) library to retri
     - **Contact Email**.
 6. Go to **API (Enable OAuth Settings)**, and select **Enable OAuth Settings**.
 
-    - In the **Callback URL** field, enter **http://localhost:3000/api/auth/callback/salesforce** and **https://YOUR_VERCEL_APP_URL/api/auth/callback/salesforce**.
+    - In the **Callback URL** field, enter `http://localhost:3000/api/auth/callback/salesforce` and `https://YOUR_VERCEL_APP_URL/api/auth/callback/salesforce`.
     - In the **Selected OAuth Scopes** field, for this demo I added all available scope. In your end you can only select **Access and manage your data (api)**, and then click **Add**.
-      ![Alt text](github-images/enable_oath_settings_config.png?raw=true 'Title')
+
+        ![Alt text](github-images/enable_oath_settings_config.png?raw=true 'Title')
 
 7. Click the **Save** button to save the new Connected App.
 8. In the **Connected Apps** list, find the App that you just created, and then click **Manage**.
@@ -43,7 +44,7 @@ This project also uses the [jsforce](https://jsforce.github.io) library to retri
 
 ### Environment Variables
 
-For local installation, create .env.local in root folder of the project.
+For local installation, create `.env.local` in root folder of the project.
 
 ```env
 SALESFORCE_CLIENT_ID=YOUR_CLIENT_KEY
@@ -58,7 +59,17 @@ To generate NextAuth Secret you can use this app: https://generate-secret.vercel
 
 ## One-click Deployment to your own Vercel Account
 
--   Todo
+Using the Vercel Deploy Button, you can quickly deploy this project into your own Vercel Account.
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fpelayochristian%2Fsalesforce-next-auth&env=SALESFORCE_URL_LOGIN,NEXTAUTH_SECRET,SALESFORCE_CLIENT_SECRET,SALESFORCE_CLIENT_ID&envDescription=Environment%20Variables%20needed%20to%20run%20this%20project.&envLink=https%3A%2F%2Fgithub.com%2Fpelayochristian%2Fsalesforce-next-auth%23environment-variables&project-name=salesforce-next-auth&repo-name=salesforce-next-auth)
+
+After clicking the Deploy button above, it will redirect to your Vercel Account, you'll see similar to the following screen shot bellow.
+
+1. Vercel will ask you to link your [Github](https://github.com), [Gitlab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/product). In this demo it uses Github, then populate the **Repository Name** and click **Create**.
+   ![Alt text](github-images/vercel_create_repo.png?raw=true 'Title')
+
+2. Next, it will proceed on setting up the **[Environment Variables](https://github.com/pelayochristian/salesforce-next-auth#environment-variables)** needed to this project to run smoothly, then click **Deploy**
+   ![Alt text](github-images/vercel_add_env_var.png?raw=true 'Title')
 
 ## Local Machine Installation
 
