@@ -2,7 +2,7 @@
 
 ![](github-images/ezgif.com-gif-maker.gif)
 
-## Introduction
+## 👋 Introduction
 
 This project was created to demonstrate how to use [NextAuth.js](https://next-auth.js.org) to Authenticate [Salesforce](https://www.salesforce.com/) as the provider of the authentication. There is no critical data that are being stored.
 
@@ -18,7 +18,7 @@ This project also uses the [jsforce](https://jsforce.github.io) library to retri
 -   [x] [Tailwind](https://tailwindcss.com/)
 -   [x] [Flowbite React Components](https://flowbite-react.com/)
 
-## Pre-Work
+## 🧑‍🔧 Pre-Work
 
 ### Create Connected App in Salesforce
 
@@ -59,7 +59,7 @@ NEXTAUTH_SECRET=YOUR_NEXTAUTH_SECRET
 
 To generate NextAuth Secret you can use this app: https://generate-secret.vercel.app/32
 
-## One-click Deployment to your own Vercel Account
+## ⚡️ One-click Deployment to your own Vercel Account
 
 Using the Vercel Deploy Button, you can quickly deploy this project into your own Vercel Account.
 
@@ -73,12 +73,17 @@ After clicking the Deploy button above, it will redirect to your Vercel Account,
 2. Next, it will proceed on setting up the **[Environment Variables](https://github.com/pelayochristian/salesforce-next-auth#environment-variables)** needed to this project to run smoothly, then click **Deploy**
    ![Alt text](github-images/vercel_add_env_var.png?raw=true 'Vercel Add Environment Variables')
 
-## Local Machine Installation
+## ⚡️ Local Machine Installation
 
 ```
 git clone https://github.com/pelayochristian/salesforce-next-auth.git
 cd salesforce-next-auth
 npm install
+```
+
+Before firing up the project make sure you already set your **[Environment Variables](https://github.com/pelayochristian/salesforce-next-auth#environment-variables)**.
+
+```
 npm run dev
 ```
 
