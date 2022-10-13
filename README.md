@@ -16,6 +16,7 @@ This project also uses the [jsforce](https://jsforce.github.io) library to retri
 -   [x] [NextAuth.js](https://next-auth.js.org)
 -   [x] [jsforce](https://jsforce.github.io)
 -   [x] [Tailwind](https://tailwindcss.com/)
+-   [x] [Typescript](https://www.typescriptlang.org/)
 -   [x] [Flowbite React Components](https://flowbite-react.com/)
 
 ## 🧑‍🔧 Pre-Work
