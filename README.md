@@ -18,7 +18,43 @@ This project also uses the [jsforce](https://jsforce.github.io) library to retri
 
 ## Pre-Work
 
--   Todo
+### Create Connected App in Salesforce
+
+1. Log in to Salesforce as an administrator.
+2. In the drop-down list of the account (in the upper-right corner), select **Setup**.
+3. In the left-hand pane, go to **App Setup > Create >Apps**.
+4. In the **Connected Apps** pane, click the **New** button.
+5. On the **New Connected App** page, fill the following required fields under **Basic Information**:
+    - **Connected App Name**. For example, NextAuth Demo.
+    - **API name**. For example, NextAuth Demo.
+    - **Contact Email**.
+6. Go to **API (Enable OAuth Settings)**, and select **Enable OAuth Settings**.
+
+    - In the **Callback URL** field, enter **http://localhost:3000/api/auth/callback/salesforce** and **https://YOUR_VERCEL_APP_URL/api/auth/callback/salesforce**.
+    - In the **Selected OAuth Scopes** field, for this demo I added all available scope. In your end you can only select **Access and manage your data (api)**, and then click **Add**.
+      ![Alt text](github-images/enable_oath_settings_config.png?raw=true 'Title')
+
+7. Click the **Save** button to save the new Connected App.
+8. In the **Connected Apps** list, find the App that you just created, and then click **Manage**.
+    - On the page that opens, click the **Edit** button.
+    - Under **OAuth policies**, select **All users may self-authorize** in the **Permitted Users** list, and then click the **Save** button.
+9. Go back to the **Connected Apps** list, and click the App that you just created.
+10. Go to **API (Enable OAuth Settings)**, and note down the **Consumer Key** and **Consumer Secret**, which will be used for the configuration of **Environment Variables**.
+
+### Environment Variables
+
+For local installation, create .env.local in root folder of the project.
+
+```env
+SALESFORCE_CLIENT_ID=YOUR_CLIENT_KEY
+SALESFORCE_CLIENT_SECRET=YOUR_SECRET_KEY
+SALESFORCE_URL_LOGIN=https://login.salesforce.com
+
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=YOUR_NEXTAUTH_SECRET
+```
+
+To generate NextAuth Secret you can use this app: https://generate-secret.vercel.app/32
 
 ## One-click Deployment to your own Vercel Account
 
@@ -26,4 +62,11 @@ This project also uses the [jsforce](https://jsforce.github.io) library to retri
 
 ## Local Machine Installation
 
--   Todo
+```
+git clone https://github.com/pelayochristian/salesforce-next-auth.git
+cd salesforce-next-auth
+npm install
+npm run dev
+```
+
+Open http://localhost:3000 with your browser to see the result.
