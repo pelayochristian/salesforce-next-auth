@@ -79,15 +79,6 @@ const refreshAccessToken = async (tokenObject: any) => {
 
 export const authOptions: NextAuthOptions = {
     callbacks: {
-        async session({ session, token }) {
-            //@ts-ignored
-            session.accessToken = token.accessToken;
-            //@ts-ignored
-            session.refreshToken = token.refreshToken;
-            //@ts-ignored
-            session.instanceUrl = token.instanceUrl;
-            return Promise.resolve(session);
-        },
         async jwt({ token, account }) {
             // Initial sign in
             if (account) {

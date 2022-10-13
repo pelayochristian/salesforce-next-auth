@@ -1,21 +1,20 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import jsforce from "jsforce"
-import { getSession } from 'next-auth/react'
+import { getToken } from 'next-auth/jwt'
 
 export const getSFDCConnection = async (req: NextApiRequest, res: NextApiResponse) => {
     try {
-        const session = await getSession({ req })
-        console.log('session', session)
-        if (!session) {
+        const jwt = await getToken({ req })
+        if (!jwt) {
             res.status(401).json({ message: 'Unauthorized!' });
             return;
         };
 
         return await new jsforce.Connection({
             // @ts-ignored
-            instanceUrl: session.instanceUrl,
+            instanceUrl: jwt.instanceUrl,
             // @ts-ignored
-            accessToken: session.accessToken,
+            accessToken: jwt.accessToken,
         });
     } catch (error) {
         return { error: 'SFDCConnectionError' }
