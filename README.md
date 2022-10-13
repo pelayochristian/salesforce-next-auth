@@ -1,5 +1,7 @@
 # Salesforce Authentication in Next.js using NextAuth
 
+![](github-images/ezgif.com-gif-maker.gif)
+
 ## Introduction
 
 This project was created to demonstrate how to use [NextAuth.js](https://next-auth.js.org) to Authenticate [Salesforce](https://www.salesforce.com/) as the provider of the authentication. There is no critical data that are being stored.
@@ -66,10 +68,10 @@ Using the Vercel Deploy Button, you can quickly deploy this project into your ow
 After clicking the Deploy button above, it will redirect to your Vercel Account, you'll see similar to the following screen shot bellow.
 
 1. Vercel will ask you to link your [Github](https://github.com), [Gitlab](https://about.gitlab.com/) or [Bitbucket](https://bitbucket.org/product). In this demo it uses Github, then populate the **Repository Name** and click **Create**.
-   ![Alt text](github-images/vercel_create_repo.png?raw=true 'Title')
+   ![Alt text](github-images/vercel_create_repo.png?raw=true 'Vercel Create Repo')
 
 2. Next, it will proceed on setting up the **[Environment Variables](https://github.com/pelayochristian/salesforce-next-auth#environment-variables)** needed to this project to run smoothly, then click **Deploy**
-   ![Alt text](github-images/vercel_add_env_var.png?raw=true 'Title')
+   ![Alt text](github-images/vercel_add_env_var.png?raw=true 'Vercel Add Environment Variables')
 
 ## Local Machine Installation
 
