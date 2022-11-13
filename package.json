@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/analytics": "^0.1.4",
     "axios": "^1.1.2",
     "flowbite": "^1.5.3",
     "flowbite-react": "^0.1.12",
